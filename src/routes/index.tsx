@@ -1,4 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -100,35 +107,28 @@ const people = [
   {
     name: "Kristina L. Silalahi, S.Kep., Ners, M.Kep.",
     role: "Direktur Migran Center",
-    pos: "0% 0%",
   },
   {
     name: "Junita Sari Puspa Bu’ulolo, A.Md.Kep.",
     role: "Informasi, Penempatan & Job Matching",
-    pos: "50% 0%",
   },
   {
     name: "Luthfiah Ramadhani, S.S.",
     role: "Pelatihan, Sertifikasi & Administrasi",
-    pos: "100% 0%",
   },
   {
     name: "Yan Raja David Hamonangan Damanik, S.E., M.M.",
     role: "Pelatihan, Sertifikasi & Administrasi",
-    pos: "0% 100%",
   },
   {
     name: "Dr. Emir Syarif Fatahillah Pakpahan, S.H., M.H.",
     role: "Perlindungan, Konseling & Kerja Sama",
-    pos: "50% 100%",
   },
   {
     name: "Myrna Pratiwi Nasution, S.P., M.P.",
     role: "Perlindungan, Konseling & Kerja Sama",
-    pos: "100% 100%",
   },
 ];
-
 const programs = [
   {
     icon: Stethoscope,
@@ -169,8 +169,11 @@ function Brand() {
 
 function Index() {
   const director = people[0];
-  if (!director) return null;
+  const teamMembers = people.slice(1);
+  const [activeTab, setActiveTab] = useState("ALL");
 
+  const filteredMembers =
+    activeTab === "ALL" ? teamMembers : teamMembers.filter((m) => m.role === activeTab);
   return (
     <main id="beranda" className="min-h-screen overflow-hidden bg-background text-foreground">
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/70 bg-background/92 backdrop-blur-xl">
@@ -191,7 +194,11 @@ function Index() {
               ["Mitra", "mitra"],
               ["FAQ", "faq"],
             ].map(([label, id]) => (
-              <a key={id} href={`#${id}`} className="transition-colors hover:text-primary">
+              <a
+                key={id}
+                href={`#${id}`}
+                className="relative py-1 transition-colors hover:text-primary after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-primary after:transition-transform after:duration-300 hover:after:scale-x-100"
+              >
                 {label}
               </a>
             ))}
@@ -327,9 +334,8 @@ function Index() {
               Pusat keunggulan PMI dari Sumatera Utara untuk dunia.
             </h2>
             <blockquote className="mt-8 border-l-4 border-primary pl-6 text-lg font-semibold leading-relaxed text-foreground/80">
-              “Menjadi Pusat Layanan Terpadu Pekerja Migran Indonesia yang Unggul, Global,
-              Profesional, dan Terlindungi Berbasis Socio-Technopreneurship di Sumatera Utara untuk
-              menyiapkan 500.000 tenaga kerja profesional pada periode 2026–2029.”
+              “Menjadi Pusat Layanan Terpadu yang Unggul dan terpecaya dalam menyiapkan Pekerja
+              Migran Indonesia yang Kompeten, profesional, berdaya saing global, serta terlindungi”
             </blockquote>
           </div>
           <div>
@@ -358,7 +364,7 @@ function Index() {
               <p className="eyebrow text-highlight">Program unggulan</p>
               <h2>Kompetensi yang dibutuhkan pasar global.</h2>
             </div>
-            <p className="text-background/60">
+            <p className="!text-white">
               Program lain seperti Nurse, Welder, Hospitality, Manufaktur, IT, tenaga pendidik, dan
               industri akan segera tersedia.
             </p>
@@ -382,39 +388,109 @@ function Index() {
         </div>
       </section>
 
-      <section id="program-saya" className="section-pad bg-background">
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <div className="text-center">
-            <p className="eyebrow">Struktur organisasi</p>
-            <h2 className="text-3xl font-extrabold sm:text-5xl">
+      <section id="program-saya" className="bg-background py-16 relative overflow-hidden">
+        <div className="mx-auto max-w-6xl px-5 lg:px-8">
+          {/* Header */}
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="inline-block rounded-full bg-primary/10 px-3.5 py-1 text-xs font-bold text-primary uppercase tracking-wider">
+              Struktur Organisasi
+            </span>
+            <h2 className="mt-3 text-3xl font-extrabold sm:text-4xl tracking-tight">
               Orang-orang yang mendampingi Anda.
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            <p className="mt-3 text-sm text-muted-foreground">
               Di bawah arahan KP2MI/BP2MI, tim kami bekerja lintas disiplin untuk pelayanan PMI yang
               utuh.
             </p>
           </div>
-          <div className="mx-auto mt-14 max-w-sm text-center">
-            <Portrait person={director} large />
-            <span className="mt-5 inline-flex rounded-full bg-primary-soft px-4 py-2 text-xs font-extrabold uppercase text-primary">
-              Direktur Migran Center
-            </span>
-            <h3 className="mt-3 text-xl font-bold">{director.name}</h3>
+
+          {/* Card Pimpinan Utama (Direktur) */}
+          <div className="mt-10 flex justify-center">
+            <div className="group relative w-full max-w-xs overflow-hidden rounded-2xl bg-card border border-border/80 p-5 shadow-sm hover:shadow-md transition-all duration-300 text-center">
+              <div className="mx-auto h-32 w-32 overflow-hidden rounded-2xl bg-muted mb-4 shadow-sm">
+                <img
+                  src={`https://ui-avatars.com/api/?name=${encodeURIComponent(director.name)}&background=random&color=fff&size=256`}
+                  alt={director.name}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <span className="inline-block rounded-md bg-primary/10 px-2.5 py-1 text-[10px] font-extrabold text-primary uppercase tracking-wider">
+                {director.role}
+              </span>
+              <h3 className="mt-2.5 text-sm font-bold text-foreground leading-snug">
+                {director.name}
+              </h3>
+            </div>
           </div>
-          <div className="mt-16 grid gap-9 sm:grid-cols-2 lg:grid-cols-5">
-            {people.slice(1).map((person) => (
-              <article key={person.name} className="text-center">
-                <Portrait person={person} />
-                <p className="mt-5 text-[11px] font-extrabold uppercase leading-snug text-primary">
-                  {person.role}
-                </p>
-                <h3 className="mt-2 text-sm font-bold leading-snug">{person.name}</h3>
-              </article>
+
+          {/* Tab Filter */}
+          <div className="mt-12 flex flex-wrap justify-center gap-2">
+            {[
+              { id: "ALL", label: "Semua Divisi" },
+              { id: "Informasi, Penempatan & Job Matching", label: "Penempatan & Job Matching" },
+              { id: "Pelatihan, Sertifikasi & Administrasi", label: "Pelatihan & Administrasi" },
+              { id: "Perlindungan, Konseling & Kerja Sama", label: "Perlindungan & Konseling" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
+                  activeTab === tab.id
+                    ? "bg-primary text-primary-foreground shadow-sm scale-105"
+                    : "bg-muted/70 text-muted-foreground hover:bg-muted hover:text-foreground"
+                }`}
+              >
+                {tab.label}
+              </button>
             ))}
+          </div>
+
+          {/* Swiper Slider (Maksimal 3 Kartu, Posisi Tengah saat Difilter, & Tinggi Sama) */}
+          <div className="mt-8">
+            <Swiper
+              key={activeTab}
+              modules={[Pagination, Navigation, Autoplay]}
+              spaceBetween={24}
+              slidesPerView={1}
+              centerInsufficientSlides={true} /* Mencegah kartu mepet ke samping saat difilter */
+              pagination={{ clickable: true, dynamicBullets: true }}
+              autoplay={
+                filteredMembers.length > 3 ? { delay: 3500, disableOnInteraction: false } : false
+              }
+              breakpoints={{
+                640: { slidesPerView: 2, spaceBetween: 24 },
+                1024: { slidesPerView: 3, spaceBetween: 24 } /* Maksimal 3 Card */,
+              }}
+              className="pb-14"
+            >
+              {filteredMembers.map((person) => (
+                <SwiperSlide key={person.name} className="!h-auto flex">
+                  <div className="group flex flex-col items-center justify-between rounded-2xl bg-card border border-border/80 p-5 shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 w-full h-full">
+                    {/* Avatar Frame */}
+                    <div className="h-32 w-32 shrink-0 overflow-hidden rounded-2xl bg-muted mb-4 shadow-sm">
+                      <img
+                        src={`https://ui-avatars.com/api/?name=${encodeURIComponent(person.name)}&background=random&color=fff&size=256`}
+                        alt={person.name}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+
+                    {/* Keterangan Teks */}
+                    <div className="text-center w-full flex flex-col flex-1 justify-between gap-3">
+                      <span className="text-[10px] font-extrabold text-primary uppercase tracking-wider block leading-snug">
+                        {person.role}
+                      </span>
+                      <h3 className="text-xs font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
+                        {person.name}
+                      </h3>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </section>
-
       <section className="section-pad bg-warm">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="section-heading">
@@ -620,19 +696,20 @@ function Index() {
   );
 }
 
-function Portrait({ person, large = false }: { person: (typeof people)[number]; large?: boolean }) {
+function Portrait({
+  person,
+  className = "",
+}: {
+  person: (typeof people)[number];
+  className?: string;
+}) {
   return (
-    <div
-      className={`mx-auto overflow-hidden rounded-2xl bg-muted ${large ? "size-52" : "aspect-[4/5] w-full max-w-48"}`}
-    >
+    <div className={`relative overflow-hidden rounded-2xl bg-muted ${className}`}>
       <img
         src={`https://ui-avatars.com/api/?name=${encodeURIComponent(person.name)}&background=random&color=fff&size=512`}
         loading="lazy"
-        width={1536}
-        height={1024}
-        alt={`Foto ilustrasi ${person.name}`}
-        className="size-full object-cover portrait-sheet"
-        style={{ objectPosition: person.pos }}
+        alt={`Foto ${person.name}`}
+        className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
       />
     </div>
   );
