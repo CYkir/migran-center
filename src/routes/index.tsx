@@ -13,6 +13,8 @@ import {
   Scale,
   ShieldCheck,
   Stethoscope,
+  Mail,
+  Phone,
 } from "lucide-react";
 import heroImage from "@/assets/migrant-center-hero.jpg";
 import Logo from "@/assets/logo.png";
@@ -154,7 +156,7 @@ function Brand() {
       className="flex shrink-0 items-center gap-3"
       aria-label="Migran Center UNPRI"
     >
-      <img src={Logo}  alt="Logo" className="h-18"/>
+      <img src={Logo} alt="Logo" className="h-18" />
       <span className="border-l-2 border-primary pl-3 text-[11px] font-extrabold leading-[1.05] text-foreground">
         MIGRAN
         <br />
@@ -243,7 +245,7 @@ function Index() {
         <div className="relative mx-auto flex min-h-[710px] max-w-7xl items-center px-5 py-20 lg:px-8">
           <div className="max-w-2xl">
             <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/85 px-4 py-2 text-xs font-extrabold uppercase text-primary shadow-sm backdrop-blur">
-              <span className="size-2 rounded-full bg-primary" /> Universitas Prima Indonesia
+              <span /> Universitas Prima Indonesia
             </p>
             <h1
               id="hero-title"
@@ -514,7 +516,7 @@ function Index() {
             href="#kontak"
             className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-background px-6 py-3.5 text-sm font-bold text-foreground"
           >
-            Konsultasi sekarang <ArrowRight className="size-4" />
+            Konsultasi sekarang
           </a>
         </div>
       </section>
@@ -562,7 +564,18 @@ function Index() {
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="grid gap-12 border-b border-background/10 pb-12 md:grid-cols-2 lg:grid-cols-4">
             <div className="lg:col-span-2">
-              <Brand />
+              <a
+                href="#beranda"
+                className="flex shrink-0 items-center gap-3"
+                aria-label="Migran Center UNPRI"
+              >
+                <img src={Logo} alt="Logo" className="h-18" />
+                <span className="border-l-2 border-primary pl-3 text-[11px] font-extrabold leading-[1.05] ">
+                  <span className="text-white mb-5 pb-5">MIGRAN</span>
+                  <br />
+                  <span className="text-white">CENTER</span>
+                </span>
+              </a>
               <p className="mt-6 max-w-md text-sm leading-relaxed text-background/55">
                 Pusat keunggulan penyiapan PMI kompeten melalui pendidikan, perlindungan, dan
                 penempatan kerja internasional.
@@ -582,10 +595,17 @@ function Index() {
               <ul className="mt-5 space-y-3 text-sm text-background/55">
                 <li className="flex gap-2">
                   <MapPin className="mt-0.5 size-4 shrink-0" />
-                  Kampus UNPRI, Medan, Sumatera Utara
+                  Jl. Sampul No.3, Sei Putih Barat, Kecamatan Medan Petisah, Kota Medan, Sumatera
+                  Utara 20118
                 </li>
-                <li>info@migrancenter.unpri.ac.id</li>
-                <li>+62 812 0000 2029</li>
+                <li className="flex gap-2">
+                  <Mail className=" mt-0.5 size-4 shrink-0" />
+                  info@migrancenter.unpri.ac.id
+                </li>
+                <li className="flex gap-2">
+                  <Phone className=" mt-0.5 size-4 shrink-0" />
+                  +62 812 0000 2029
+                </li>
               </ul>
             </div>
           </div>
