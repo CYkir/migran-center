@@ -241,7 +241,7 @@ function Index() {
         </div>
       </header>
 
-      <section className="relative h-screen  bg-hero" aria-labelledby="hero-title">
+      <section className="relative min-h-fit md:min-h-screen bg-hero" aria-labelledby="hero-title">
         <img
           src={heroImage}
           width={1600}
@@ -250,8 +250,10 @@ function Index() {
           className="absolute inset-0 size-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-hero-overlay" />
-        <div className="relative mx-auto flex min-h-[710px] max-w-7xl items-center px-5 py-20 lg:px-8">
-          <div className="max-w-2xl  mt-28">
+
+        {/* Di HP menggunakan padding alami (pt-28 pb-12), di Desktop baru min-h-screen */}
+        <div className="relative mx-auto flex max-w-7xl items-center px-5 pt-28 pb-12 md:min-h-screen md:py-20 lg:px-8">
+          <div className="max-w-2xl">
             <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/85 px-4 py-2 text-xs font-extrabold uppercase text-primary shadow-sm backdrop-blur">
               <span /> Universitas Prima Indonesia
             </p>
