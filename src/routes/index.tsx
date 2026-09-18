@@ -20,7 +20,6 @@ import heroImage from "@/assets/migrant-center-hero.jpg";
 import Logo from "@/assets/logo.png";
 import LogoWhite from "@/assets/logo-white.png";
 
-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -174,7 +173,7 @@ function Index() {
 
   return (
     <main id="beranda" className="min-h-screen overflow-hidden bg-background text-foreground">
-      <header className="sticky top-0 z-50 border-b border-border/70 bg-background/92 backdrop-blur-xl">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/70 bg-background/92 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-5 px-5 lg:px-8">
           <Brand />
           <nav
@@ -235,7 +234,7 @@ function Index() {
         </div>
       </header>
 
-      <section className="relative min-h-[710px] bg-hero" aria-labelledby="hero-title">
+      <section className="relative h-screen  bg-hero" aria-labelledby="hero-title">
         <img
           src={heroImage}
           width={1600}
@@ -245,7 +244,7 @@ function Index() {
         />
         <div className="absolute inset-0 bg-hero-overlay" />
         <div className="relative mx-auto flex min-h-[710px] max-w-7xl items-center px-5 py-20 lg:px-8">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl  mt-28">
             <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/85 px-4 py-2 text-xs font-extrabold uppercase text-primary shadow-sm backdrop-blur">
               <span /> Universitas Prima Indonesia
             </p>
