@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import heroImage from "@/assets/migrant-center-hero.jpg";
 import Logo from "@/assets/logo.png";
+import LogoWhite from "@/assets/logo-white.png";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -569,7 +571,7 @@ function Index() {
                 className="flex shrink-0 items-center gap-3"
                 aria-label="Migran Center UNPRI"
               >
-                <img src={Logo} alt="Logo" className="h-18" />
+                <img src={LogoWhite} alt="Logo" className="h-18" />
                 <span className="border-l-2 border-primary pl-3 text-[11px] font-extrabold leading-[1.05] ">
                   <span className="text-white mb-5 pb-5">MIGRAN</span>
                   <br />
