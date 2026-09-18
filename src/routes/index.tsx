@@ -186,8 +186,8 @@ function Index() {
             {[
               ["Tentang", "tentang"],
               ["Layanan", "layanan"],
-              ["Info Program", "program"],
-              ["Program Saya", "program-saya"],
+              ["Program", "program"],
+              ["Tim Kami", "program-saya"],
               ["Berita", "berita"],
               ["Album", "album"],
               ["Pengumuman", "pengumuman"],
