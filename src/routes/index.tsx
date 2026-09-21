@@ -493,6 +493,7 @@ function Index() {
           </div>
         </div>
       </section>
+      
       <section className="section-pad bg-warm">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="section-heading">
